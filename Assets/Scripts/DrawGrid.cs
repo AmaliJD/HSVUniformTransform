@@ -12,7 +12,7 @@ public class DrawGrid : MonoBehaviour
     float numRows;
 
     int showCursorComparisonIndex = 1;
-    const int maxCursorTypes = 5;
+    const int maxCursorTypes = 6;
 
     public Vector2Int GetDimensions() => new Vector2Int((int)numColumns, (int)numRows);
     public Color[,] GetColors() => colors;
@@ -104,6 +104,10 @@ public class DrawGrid : MonoBehaviour
                 case 4:
                     GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
                     GLGizmos.DrawSolid2DBoxArray(snappedCursor + (Vector2.up * 2f * rev), 4f, 3f, new Vector2(12, 9), new Color[2, 2] { { colors[x, y], grayColor }, { grayColor, colors[x, y] } });
+                    break;
+                case 5:
+                    GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
+                    GLGizmos.DrawSolid2DBoxArray(snappedCursor + (Vector2.up * 2f * rev), 6f, 3f, new Vector2(72, 36), new Color[2, 2] { { colors[x, y], grayColor }, { grayColor, colors[x, y] } });
                     break;
                 default:
                     break;

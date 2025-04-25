@@ -175,7 +175,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 113
+  controlID: 112
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -440,7 +440,7 @@ MonoBehaviour:
   changesView:
     currentBranchHasUpdate: 1
     currentStatusEntriesHasUpdate: 1
-    currentLocksHasUpdate: 0
+    currentLocksHasUpdate: 1
     commitBody: 
     commitMessage: 
     currentBranch: main
@@ -673,13 +673,13 @@ MonoBehaviour:
     m_Tooltip: Url of the origin remote
     m_TextWithWhitespace: "https://github.com/AmaliJD/HSVUniformTransform.git\u200B"
   lastCurrentBranchAndRemoteChangedEvent:
-    updatedTimeString: 2025-04-25T01:39:13.493-04:00
+    updatedTimeString: 2025-04-25T19:02:15.925-04:00
     cacheType: 1
   lastTrackingStatusChangedEvent:
-    updatedTimeString: 2025-04-25T01:51:56.857-04:00
+    updatedTimeString: 2025-04-25T19:02:16.163-04:00
     cacheType: 5
   lastStatusEntriesChangedEvent:
-    updatedTimeString: 2025-04-25T01:51:56.827-04:00
+    updatedTimeString: 2025-04-25T19:02:07.185-04:00
     cacheType: 6
   pullButtonContent:
     m_Text: Pull
@@ -1967,7 +1967,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 44602
+  m_LastSelectedObjectID: 45768
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -2081,7 +2081,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: be8bffffd08bffff408efffff4d8ffff06d9ffff7adbffff08fbffff
+      m_ExpandedIDs: 08fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
