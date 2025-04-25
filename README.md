@@ -20,14 +20,14 @@ Converting this to b&w with most software will result in a perfectly smooth grad
 
 ![hsv-uniform-gamma 1 -gray 1](https://github.com/user-attachments/assets/e5d97efa-fa12-4a4e-ae2b-c8aa7e44651e)
 
-Applying a power function helps a lot with the rainbow gradient. A color science researcher acknowledged my gradient looked pretty good. Comparing it a gradient made in the OkLAB color space, it's pretty close! The spacing of the OkLAB hues reflects it's own perceptually uniform gradation of the hues, as opposed to HSV's non-perceptually uniform gradation, but the shape is there!
+Applying a power function helps a lot with the rainbow gradient. A color science researcher acknowledged my resulting gradient looked pretty good. Comparing it to a gradient made in the OK-LAB color space, it's pretty close! The spacing of the OK-LAB hues reflects it's own perceptually uniform gradation of the hues, as opposed to HSV's non-perceptually uniform gradation, but the shape is there.
 
-<h5>HSV-luminance-gamma[2.4] ------------- OKLAB</h5>
+<h5>HSV-luminance-gamma[2.4] ------------- OK-LAB</h5>
 
 ![hsv-uniform-gamma 2 4](https://github.com/user-attachments/assets/210f8989-353f-4947-ab0e-4b7e8099bed4)
 ![oklch](https://github.com/user-attachments/assets/76aa0ee3-a085-42e2-9b8a-b609e0711a15)
 
-But he pointed out that an issue with "perceptual lightness" is that because of the Helmholtz–Kohlrausch effect, darker colors like blue can still look brighter than lighter colors because of it's saturation. This means the brightness of a color is both influenced by it's percieved luminance AND it's saturation, which is a BITCH becuase those properties so not combine to create one unifird property I'd like to call vibrance. I searched for better lightness functions that could take the Helmholtz–Kohlrausch effect into account, cuz I was not satisfied with these gradients.
+But he pointed out that an issue with "perceptual lightness" is that because of the Helmholtz–Kohlrausch effect, darker colors like blue can still look brighter than lighter colors because of it's saturation. You can see in the gradient that even though blue is placed low on the spectrum, it pops out way more than the other colors of "equal" lightness. This means the brightness of a color is both influenced by it's percieved luminance AND it's saturation, which is a BITCH becuase those properties so not combine to create one unified property I'd like to call vibrance. It also means this whole project is kinda absurd, I cannot rank colors by lightness because their saturation adds a different kind of brightness to the color that's spereate from the lightness yet still creates an overall sensation of the color being more vibrant and this "brighter". But I can still try my best! I searched for better lightness functions that could take the Helmholtz–Kohlrausch effect into account, cuz I was not satisfied with these gradients.
 
 The CAM16 model's Q value is a brightness value that takes the Helmholtz–Kohlrausch effect into account so I used that, tho fsr wound up with strange artifacts in the resulting image.
 
