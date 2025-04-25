@@ -69,8 +69,8 @@ public class DrawGrid : MonoBehaviour
         float cellHeight = height / numRows;
         Vector2 snappedCursor = new Vector2((-width / 2) + (cellWidth / 2), (-height / 2) + (cellHeight / 2)) + new Vector2(x * cellWidth, y * cellHeight);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            SetColors();
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    SetColors();
 
         ScrollColor(x, y);
 
@@ -97,10 +97,12 @@ public class DrawGrid : MonoBehaviour
                     GLGizmos.DrawBoxRing(snappedCursor, new Vector2(width * 2.5f, cellHeight), .2f, grayColor);
                     break;
                 case 3:
+                    GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
                     GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * 1.5f * rev) + (Vector2.left * 1), Vector2.one * 2, grayColor);
                     GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * 1.5f * rev) - (Vector2.left * 1), Vector2.one * 2, colors[x, y]);
                     break;
                 case 4:
+                    GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
                     GLGizmos.DrawSolid2DBoxArray(snappedCursor + (Vector2.up * 2f * rev), 4f, 3f, new Vector2(12, 9), new Color[2, 2] { { colors[x, y], grayColor }, { grayColor, colors[x, y] } });
                     break;
                 default:
@@ -118,6 +120,9 @@ public class DrawGrid : MonoBehaviour
     void ScrollColor(int x, int y)
     {
         if (x >= numColumns || x < 0 || y >= numRows - 1 || y < 1)
+            return;
+
+        if (showCursorComparisonIndex == 0)
             return;
 
         float mouseScrollDelta = Input.mouseScrollDelta.y;
