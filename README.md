@@ -8,7 +8,7 @@ Below is the original HSV gradient. It's 255x255 and ordered so each column is i
 
 ![hsv-linear](https://github.com/user-attachments/assets/ed8a035f-c5f4-49a5-bb27-290f52c43c3e)
 
-This is my attempt at the transformation made in Python. I used the luminance formala L = 0.299*R + 0.587*G + 0.114*B to get the lightness of each coloer in the column and place organize them so every row was of the same value.
+This is my first attempt at the transformation, made in Python. I used the luminance formula L = 0.299*R + 0.587*G + 0.114*B to get the lightness of each color in the column and organize them so every row was a color of the same lightness value.
 
 <h5>HSV-luminance</h5>
 
