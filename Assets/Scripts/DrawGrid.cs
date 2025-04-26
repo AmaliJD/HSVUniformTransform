@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Hierarchy;
 
 public class DrawGrid : MonoBehaviour
 {
@@ -12,10 +13,15 @@ public class DrawGrid : MonoBehaviour
     float numRows;
 
     int showCursorComparisonIndex = 1;
-    const int maxCursorTypes = 6;
+    const int maxCursorTypes = 8;
 
     public Vector2Int GetDimensions() => new Vector2Int((int)numColumns, (int)numRows);
     public Color[,] GetColors() => colors;
+    int frame;
+    bool flickerOn;
+
+    float flickerTimer;
+    const float FLICKER_TIME = .25f;
 
     public void LoadColors(SaveData saveData)
     {
@@ -109,6 +115,24 @@ public class DrawGrid : MonoBehaviour
                     GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
                     GLGizmos.DrawSolid2DBoxArray(snappedCursor + (Vector2.up * 2f * rev), 6f, 3f, new Vector2(72, 36), new Color[2, 2] { { colors[x, y], grayColor }, { grayColor, colors[x, y] } });
                     break;
+                case 6:
+                    GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
+                    GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * 2.75f * rev), Vector2.one * 4.25f, flickerOn ? grayColor : colors[x, y]);
+                    break;
+                case 7:
+                    GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
+
+                    float steps = 9;
+                    float boxSize = .5f;
+                    float gradientWidth = (boxSize * (steps-1)) / 2;
+                    float offset = InverseLerp((numColumns - 1) / 2, numColumns - 1, x);
+                    for (float i = 0; i < steps; i++)
+                    {
+                        float t = i / (steps - 1);
+                        float tx = InverseLerp((steps - 1) / 2, steps - 1, i);
+                        GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * (boxSize * 2 + .5f) * rev) + (Vector2.right * tx * gradientWidth) - (Vector2.right * offset * gradientWidth), new Vector2(boxSize, boxSize * 4), Color.Lerp(grayColor, colors[x, y], t));
+                    }
+                    break;
                 default:
                     break;
             }
@@ -119,7 +143,19 @@ public class DrawGrid : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+
+        flickerTimer += Time.deltaTime;
+        if (flickerTimer > FLICKER_TIME)
+        {
+            flickerTimer = 0;
+            flickerOn = !flickerOn;
+        }
+        Debug.Log(flickerTimer);
+
+        frame++;
     }
+
+    float InverseLerp(float a, float b, float value) => (value - a) / (b - a);
 
     void ScrollColor(int x, int y)
     {
