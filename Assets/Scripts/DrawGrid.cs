@@ -84,6 +84,10 @@ public class DrawGrid : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
             showCursorComparisonIndex = ++showCursorComparisonIndex % maxCursorTypes;
+        if (Input.GetKeyDown(KeyCode.X))
+            showCursorComparisonIndex = (maxCursorTypes + --showCursorComparisonIndex) % maxCursorTypes;
+
+        Debug.Log(showCursorComparisonIndex);
 
         if (showCursorComparisonIndex != 0 && (y >= 0 && y < numRows) && (x < numColumns && x >= 0))
         {
@@ -150,7 +154,6 @@ public class DrawGrid : MonoBehaviour
             flickerTimer = 0;
             flickerOn = !flickerOn;
         }
-        Debug.Log(flickerTimer);
 
         frame++;
     }
