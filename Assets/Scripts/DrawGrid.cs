@@ -92,6 +92,7 @@ public class DrawGrid : MonoBehaviour
             float grayLightness = Mathf.Pow((L + 16) / 116, 3);
             Color grayColor = new Color(grayLightness, grayLightness, grayLightness);
             float rev = percentage > .5f ? -1 : 1;
+            float offsetX = InverseLerp((numColumns - 1) / 2, numColumns - 1, x);
 
             switch (showCursorComparisonIndex)
             {
@@ -104,8 +105,8 @@ public class DrawGrid : MonoBehaviour
                     break;
                 case 3:
                     GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
-                    GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * 1.5f * rev) + (Vector2.left * 1), Vector2.one * 2, grayColor);
-                    GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * 1.5f * rev) - (Vector2.left * 1), Vector2.one * 2, colors[x, y]);
+                    GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * 1.5f * rev) + (Vector2.left * 1) - (Vector2.right * offsetX * 2), Vector2.one * 2f, grayColor);
+                    GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * 1.5f * rev) - (Vector2.left * 1) - (Vector2.right * offsetX * 2), Vector2.one * 2f, colors[x, y]);
                     break;
                 case 4:
                     GLGizmos.DrawBoxRing(snappedCursor, new Vector2(cellWidth, cellHeight), .2f, grayColor);
@@ -125,12 +126,11 @@ public class DrawGrid : MonoBehaviour
                     float steps = 9;
                     float boxSize = .5f;
                     float gradientWidth = (boxSize * (steps-1)) / 2;
-                    float offset = InverseLerp((numColumns - 1) / 2, numColumns - 1, x);
                     for (float i = 0; i < steps; i++)
                     {
                         float t = i / (steps - 1);
                         float tx = InverseLerp((steps - 1) / 2, steps - 1, i);
-                        GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * (boxSize * 2 + .5f) * rev) + (Vector2.right * tx * gradientWidth) - (Vector2.right * offset * gradientWidth), new Vector2(boxSize, boxSize * 4), Color.Lerp(grayColor, colors[x, y], t));
+                        GLGizmos.DrawSolidBox(snappedCursor + (Vector2.up * (boxSize * 2 + .5f) * rev) + (Vector2.right * tx * gradientWidth) - (Vector2.right * offsetX * (gradientWidth + .1f)), new Vector2(boxSize, boxSize * 4), Color.Lerp(grayColor, colors[x, y], t));
                     }
                     break;
                 default:
